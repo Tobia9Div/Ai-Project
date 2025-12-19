@@ -36,8 +36,8 @@ Requirements: Python 3.x and Tkinter library (pre-installed with Python).
 
 ## Clone the Repo:
 
-` ` ` git clone https://github.com/your-username/maze-ai-project.git
+` ` ` git clone https://github.com/your-username/maze-ai-project.git `
 
 ## Run the Project:
 
-` ` ` python main.py
+` ` ` python main.py `
