@@ -41,3 +41,13 @@ Requirements: Python 3.x and Tkinter library (pre-installed with Python).
 ## Run the Project:
 
 ` ` ` python main.py `
+
+
+## Team :
+*الامين حيدر محمد
+*محمد مجدي محمد 
+*محمد الهادي عبدالرحمن
+*محمد انور الطيب
+*احمد عبدالغفور يس
+*احمد صديق عبدالوهاب 
+*رنيم معاوية عابدين
