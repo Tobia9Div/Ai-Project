@@ -26,6 +26,10 @@ class MazeApp:
         
         tk.Button(root, text="Run BFS", command=self.run_bfs).pack(side=tk.LEFT, padx=10)
         tk.Button(root, text="Run A*", command=self.run_astar).pack(side=tk.RIGHT, padx=10)
+        tk.Button(root, text="Run DFS", command=self.run_dfs).pack(side=tk.BOTTOM, pady=5)
+        tk.Button(root, text="Run GBFS", command=self.run_gbfs).pack(side=tk.BOTTOM, pady=5)
+
+
 
     def draw_maze(self):
         for r in range(len(MAZE)):
@@ -57,6 +61,35 @@ class MazeApp:
         end_time = (time.time() - start_time) * 1000 # تحويل إلى ميلي ثانية
         self.update_stats("BFS", nodes_explored, end_time)
         self.reconstruct_path(visited)
+
+
+    def run_dfs(self):
+     start_time = time.time()
+     nodes_explored = 0
+
+     stack = [START]              # Stack بدل Queue
+     visited = {START: None}
+
+     while stack:
+        curr = stack.pop()       # LIFO
+        nodes_explored += 1
+
+        if curr == GOAL:
+            break
+
+        for dr, dc in [(0,1), (1,0), (0,-1), (-1,0)]:
+            r, c = curr[0] + dr, curr[1] + dc
+            next_node = (r, c)
+
+            if 0 <= r < 5 and 0 <= c < 5:
+                if MAZE[r][c] == 0 and next_node not in visited:
+                    visited[next_node] = curr
+                    stack.append(next_node)
+
+     end_time = (time.time() - start_time) * 1000
+     self.update_stats("DFS", nodes_explored, end_time)
+     self.reconstruct_path(visited)
+
 
     def run_astar(self):
         start_time = time.time()
@@ -91,6 +124,44 @@ class MazeApp:
         """تحديث بيانات الأداء على الشاشة"""
         stats = f"{algo} -> Nodes: {nodes}, Time: {exec_time:.2f}ms"
         self.canvas.itemconfig(self.info_text, text=stats)
+    
+    def run_gbfs(self):
+     start_time = time.time()
+     nodes_explored = 0
+    
+     def heuristic(a, b):
+        return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+     pq = [(heuristic(START, GOAL), START)]  # Priority Queue
+     visited = {START: None}
+     explored = set()
+
+     while pq:
+        _, curr = heapq.heappop(pq)
+
+        if curr in explored:
+            continue
+
+        explored.add(curr)
+        nodes_explored += 1
+
+        if curr == GOAL:
+            break
+
+        for dr, dc in [(0,1), (1,0), (0,-1), (-1,0)]:
+            r, c = curr[0] + dr, curr[1] + dc
+            next_node = (r, c)
+
+            if 0 <= r < 5 and 0 <= c < 5:
+                if MAZE[r][c] == 0 and next_node not in visited:
+                    visited[next_node] = curr
+                    priority = heuristic(next_node, GOAL)
+                    heapq.heappush(pq, (priority, next_node))
+
+     end_time = (time.time() - start_time) * 1000
+     self.update_stats("GBFS", nodes_explored, end_time)
+     self.reconstruct_path(visited)
+
 
     def reconstruct_path(self, visited):
         path = []
