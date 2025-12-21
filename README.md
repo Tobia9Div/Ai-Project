@@ -12,25 +12,15 @@ The following algorithms are implemented to solve the maze problem:
 
 Breadth-First Search (BFS): Guarantees the shortest path in a uniform cost grid.
 
-Depth-First Search (DFS): Explores paths deeply; memory-efficient but not optimal.
-
 * Informed Search:
 
 *A Search:** Uses Manhattan Distance heuristic to find the optimal path efficiently.
 
-
-Uniform-Cost Search (UCS): Expands the cheapest node first.
-
-Hill Climbing: A local search move-based approach toward the goal.
-
 📊 Performance Comparison
 Based on our implementation, here is a summary of how the algorithms performed on a 5x5 maze:
 
-Algorithm,Nodes Explored,Path Length,Optimality
-BFS,High,Shortest,Yes
-*A (Manhattan)**,Lowest,Shortest,Yes
-DFS,Variable,Long,No
-
+BFS takes a longer time because it visit more nodes 
+in the other hand the A* algorithm takes less time because it take the best path from the start point to the goal
 ## 🛠️ Installation & Usage
 Requirements: Python 3.x and Tkinter library (pre-installed with Python).
 
@@ -48,6 +38,5 @@ Requirements: Python 3.x and Tkinter library (pre-installed with Python).
 *محمد مجدي محمد 
 *محمد الهادي عبدالرحمن
 *محمد انور الطيب
-*احمد عبدالغفور يس
 *احمد صديق عبدالوهاب 
 *رنيم معاوية عابدين
